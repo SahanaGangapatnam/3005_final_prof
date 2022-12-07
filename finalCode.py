@@ -156,6 +156,9 @@ def checkOrCreateUserAccount(table_name):
         else:
             user_input = input('Please create a Username of Length 10 or Less: ')
             pass_input = input('Please create a Password of Length 10 or Less: ')
+            if (table_name == 'USERS'):
+                billing_address_input = input("Please Enter Your Billing Address: ")
+                shipping_address_input = input("Please Enter Your Shipping Address: ")
             query = "INSERT INTO %s (userName, userPass) VALUES (%%s, %%s)" % table_name
             cur.execute(query, (user_input, pass_input))
             print(f"Your Account has Been Added!")
@@ -177,7 +180,7 @@ with psycopg2.connect(
         owner = False
         user_name = ""
         cart = []
-        status_list = ['Not Packaged', 'Packaged', 'Not Delivered', 'Delivered', 'In Transit', 'Reached']
+        status_list = ['Not Packaged', 'Packaged', 'Not Shipped', 'Shipped', 'In Transit', 'Delivered']
 
         # USER PORTION
         if (type_input == '1'):
